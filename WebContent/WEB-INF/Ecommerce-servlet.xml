@@ -16,24 +16,29 @@
  	<!-- Getting the context pacakage the controllers and codes are located. -->
 	<context:component-scan base-package="com.ecommerce" />
  	
- 	<!--  Telling the database properties username/password etc has to be read from this properties 
+ 	<!--  Telling the database properties username/password etc has to be read from this properties
  	<context:property-placeholder location="classpath:database.properties"/>
  	-->
  	
  	<!--  This is to mention that this is the annotation driven -->
+ 	<mvc:resources location="/css/" mapping="/css/**"  />
+ 	<mvc:resources location="/fonts/" mapping="/fonts/**"  />
+    	<mvc:resources location="/images/" mapping="/images/**"  />
+    	<mvc:resources location="/include/" mapping="/include/**"  />
+    	<mvc:resources location="/js/" mapping="/js/**" />
  	<mvc:annotation-driven/>
  	
  	<!--  View Resolver. There are other view resolver, here we mention what we are using -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WebContent/" />
+		<property name="prefix" value="/WEB-INF/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
 	<!-- Database Specifications . This is referenced from the .properties file -->
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost:3306/userdb"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/userdb?verifyServerCertificate=false&amp;useSSL=true"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="admin123"></property>
 	</bean>
@@ -43,10 +48,10 @@
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop> 			<!-- *****check this??*** -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.default.schema">USERDB</prop>
 			</props>
 		</property>
