@@ -19,7 +19,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/newmember",method=RequestMethod.GET)
-	public ModelAndView newSpringStudent(ModelAndView modelView) {
+	public ModelAndView newMember(ModelAndView modelView) {
 		Member member = new Member();
 		modelView.addObject("member",member);
 		modelView.setViewName("addnewmember");
@@ -27,15 +27,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/addmember", method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView addSpringStudent(@ModelAttribute Member member) {
+	public ModelAndView addMember(@ModelAttribute Member member) {
 		System.out.println("----------");
 		if (member.getId() == 0) {
 			memberService.addMember(member);
 		} else {
-			memberService.updateStudent(member);
+			memberService.updateMember(member);
 		}
 		ArrayList<Member> membersList = memberService.getMembersList();
 
-		return new ModelAndView("membersList","membersList",membersList);
+		return new ModelAndView("membersList","membersList", membersList);
 	}
 }
