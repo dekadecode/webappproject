@@ -10,6 +10,6 @@ public interface MemberService {
 	
 	public ArrayList<Member> getMembersList();
 	
-	public Member updateStudent(Member member);
+	public Member updateMember(Member member);
 	
 }
