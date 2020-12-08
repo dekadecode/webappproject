@@ -78,46 +78,51 @@
               <h2>Registration</h2>
               <p>Register here for our next events.</p>
             </div>
-            <form method="post" action="RegisterServlet">
-              
+  	<form:form action="registration" method="GET" modelAttribute="member">
+            	<form:hidden path="id"/>
                   <div class="row">
                       <div class="col-md-6 form-group">
                           <label for="uname">User Name</label>
-                          <input type="text" id="uname" class="form-control form-control-lg">
+                          <form:input path="uname"/>
+                          <!--  <input type="text" id="uname" class="form-control form-control-lg"> -->
                       </div>
                       <div class="col-md-6 form-group">
                           <label for="password">Password</label>
-                          <input type="password" id="password" class="form-control form-control-lg">
+                          <form:input path="password"/>
+                          <!--  <input type="password" id="password" class="form-control form-control-lg"> -->
                       </div>
                   </div>
                   <div class="row">
                       <div class="col-md-6 form-group">
                           <label for="fname">First Name</label>
-                          <input type="text" id="fname" class="form-control form-control-lg">
+                          <form:input path="fname"/>
+                          <!--  <input type="text" id="fname" class="form-control form-control-lg"> -->
                       </div>
                       <div class="col-md-6 form-group">
                           <label for="lname">Last Name</label>
-                          <input type="text" id="lname" class="form-control form-control-lg">
+                          <form:input path="lname"/>
+                          <!--  <input type="text" id="lname" class="form-control form-control-lg"> -->
                       </div>
                   </div>
                  <div class="row">
                       <div class="col-md-6 form-group">
                           <label for="email">Email</label>
-                          <input type="text" id="email" class="form-control form-control-lg">
+                          <form:input path="email"/>
+                          <!--  <input type="text" id="email" class="form-control form-control-lg"> -->
                       </div>
                       <div class="col-md-6 form-group">
                           <label for="phone">Phone</label>
-                          <input type="text" id="phone" class="form-control form-control-lg">
+                          <form:input path="phone"/>
+                         <!--   <input type="text" id="phone" class="form-control form-control-lg"> -->
                       </div>
                   </div>
 					<br>
                   <div class="row">
-                      <div class="col-12">
+                      <div class="col-12"></div>
                           <input type="submit" value="Register" class="btn btn-primary py-3 px-5">
                       </div>
                   </div>
-              
-            </form>
+            </form:form>
           </div>
           
         </div>
