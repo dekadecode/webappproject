@@ -1,41 +1,59 @@
 package com.ecommerce;
 
 import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller		//@RestController
 @RequestMapping
 public class MemberController {
-
+	
 	@Autowired
-	private MemberService memberService;
+	private MemberService memberService;	//connection point to the entire database layer
 	
 	public MemberController() {
+		System.out.println("MemberController()");
 	}
 	
-	@RequestMapping(value="/newmember",method=RequestMethod.GET)
-	public ModelAndView newMember(ModelAndView modelView) {
+	@RequestMapping(value="/")
+	public ModelAndView membersList(ModelAndView model){
+		ArrayList<Member> membersList = memberService.getMembersList();
+		model.addObject("membersList", membersList);
+		model.setViewName("membersList");
+		return model;
+	}
+		
+	@RequestMapping(value="/newmember", method=RequestMethod.GET)
+	public ModelAndView newMember(ModelAndView model) {
 		Member member = new Member();
-		modelView.addObject("member",member);
-		modelView.setViewName("addnewmember");
-		return modelView;
+		model.addObject("member", member);
+		model.setViewName("addnewmember");
+		return model;
 	}
 	
-	@RequestMapping(value="/addmember", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/registration", method = {RequestMethod.GET, RequestMethod.POST})	//RequestMethod.GET,RequestMethod.POST
 	public ModelAndView addMember(@ModelAttribute Member member) {
-		System.out.println("----------");
+		System.out.println("----------adding member--------");
 		if (member.getId() == 0) {
 			memberService.addMember(member);
 		} else {
 			memberService.updateMember(member);
 		}
-		ArrayList<Member> membersList = memberService.getMembersList();
-
+		ArrayList<Member> membersList = memberService.getMembersList();	
+		
 		return new ModelAndView("membersList","membersList", membersList);
 	}
+	
+	@RequestMapping(value = "/redirect", method = RequestMethod.GET)
+	   public String redirect() {
+	     
+	      return "redirect:thankyou";
+	   }
+	   
 }
