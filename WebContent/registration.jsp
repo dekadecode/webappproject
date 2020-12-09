@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
 <head>
@@ -78,56 +77,54 @@
               <h2>Registration</h2>
               <p>Register here for our next events.</p>
             </div>
-  	<form:form action="registration" method="GET" modelAttribute="member">
+            
+            <form:form action="register" method="GET" modelAttribute="member">
             	<form:hidden path="id"/>
                   <div class="row">
                       <div class="col-md-6 form-group">
                           <label for="uname">User Name</label>
-                          <form:input path="uname"/>
+                          <form:input class="form-control form-control-lg" path="uname"/>
                           <!--  <input type="text" id="uname" class="form-control form-control-lg"> -->
                       </div>
                       <div class="col-md-6 form-group">
                           <label for="password">Password</label>
-                          <form:input path="password"/>
+                          <form:input class="form-control form-control-lg" type="password" path="password"/>
                           <!--  <input type="password" id="password" class="form-control form-control-lg"> -->
                       </div>
                   </div>
                   <div class="row">
                       <div class="col-md-6 form-group">
                           <label for="fname">First Name</label>
-                          <form:input path="fname"/>
+                          <form:input class="form-control form-control-lg" path="fname"/>
                           <!--  <input type="text" id="fname" class="form-control form-control-lg"> -->
                       </div>
                       <div class="col-md-6 form-group">
                           <label for="lname">Last Name</label>
-                          <form:input path="lname"/>
+                          <form:input class="form-control form-control-lg" path="lname"/>
                           <!--  <input type="text" id="lname" class="form-control form-control-lg"> -->
                       </div>
                   </div>
                  <div class="row">
                       <div class="col-md-6 form-group">
                           <label for="email">Email</label>
-                          <form:input path="email"/>
-                          <!--  <input type="text" id="email" class="form-control form-control-lg"> -->
+                          <form:input class="form-control form-control-lg" type="email" path="email"/>
+                          <!--  <input type="email" id="email" class="form-control form-control-lg"> -->
                       </div>
                       <div class="col-md-6 form-group">
                           <label for="phone">Phone</label>
-                          <form:input path="phone"/>
+                          <form:input class="form-control form-control-lg" path="phone"/>
                          <!--   <input type="text" id="phone" class="form-control form-control-lg"> -->
                       </div>
                   </div>
 					<br>
                   <div class="row">
-                      <div class="col-12"></div>
+                      <div class="col-12">
                           <input type="submit" value="Register" class="btn btn-primary py-3 px-5">
                       </div>
                   </div>
             </form:form>
           </div>
-          
         </div>
-
-        
       </div>
     </div>
     
