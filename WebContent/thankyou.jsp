@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
 <head>
@@ -66,24 +66,22 @@
 				<div class="col-md-12 text-center">
 					<span class="icon-check_circle display-3 text-success"></span>
 					<h2 class="display-3 text-black font-heading-serif">Thank you!</h2>
-					<p class="lead mb-5">You reservation was successfully
-						completed.</p>
+					<p class="lead mb-5">You reservation was successfully completed.</p>
 					<p>
-						<a href="shop.html"
-							class="btn btn-md height-auto px-4 py-3 btn-primary">Back to
-							store</a>
+						<!-- <input type="button" value="Back to home" class="btn btn-md height-auto px-4 py-3 btn-primary" onclick="window.location='index.jsp'" > -->
+						<form:form action="redirect" method="GET" >
+							<input type = "submit" class="btn btn-md height-auto px-4 py-3 btn-primary" value = "Back to home"/>
+						</form:form>
 					</p>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
 	<!-- footer -->
 	<jsp:include page="include/footer.jsp"></jsp:include>
 
 	<!-- .site-wrap -->
-
 
 	<!-- loader -->
 	<div id="loader" class="show fullscreen">
