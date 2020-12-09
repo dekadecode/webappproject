@@ -1,3 +1,4 @@
+<!-- View Resolver implemented as a bean -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" 
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -13,29 +14,30 @@
         http://www.springframework.org/schema/tx 
         http://www.springframework.org/schema/tx/spring-tx.xsd">
  
- 	<!-- Getting the context pacakage the controllers and codes are located. -->
+ 	<!-- Getting the context package where the controllers and codes are located. -->
 	<context:component-scan base-package="com.ecommerce" />
  	
  	<!--  Telling the database properties username/password etc has to be read from this properties
  	<context:property-placeholder location="classpath:database.properties"/>
- 	-->
+	-->
  	
- 	<!--  This is to mention that this is the annotation driven -->
+ 	<!--  Specifying the Resource location to load JSP, CSS, Images, etc-->
  	<mvc:resources location="/css/" mapping="/css/**"  />
  	<mvc:resources location="/fonts/" mapping="/fonts/**"  />
-    	<mvc:resources location="/images/" mapping="/images/**"  />
-    	<mvc:resources location="/include/" mapping="/include/**"  />
-    	<mvc:resources location="/js/" mapping="/js/**" />
+    <mvc:resources location="/images/" mapping="/images/**"  />
+    <mvc:resources location="/include/" mapping="/include/**"  />
+    <mvc:resources location="/js/" mapping="/js/**" />
+    <!--  This is to mention that this is the annotation driven -->
  	<mvc:annotation-driven/>
  	
- 	<!--  View Resolver. There are other view resolver, here we mention what we are using -->
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/" />
+ 	<!--  View Resolver. There are other view resolvers. Here we mention the one we are using -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<!-- Database Specifications . This is referenced from the .properties file -->
+	<!-- Database Source Specifications . This is referenced from the .properties file -->
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/userdb?verifyServerCertificate=false&amp;useSSL=true"></property>
@@ -43,7 +45,7 @@
 		<property name="password" value="admin123"></property>
 	</bean>
 	
-	<!-- Hibernate details -->
+	<!-- Hibernate SessionFactory related properties -->
 	<bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" id="sessionFactory">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="hibernateProperties">
@@ -52,18 +54,19 @@
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.default.schema">USERDB</prop>
+				<prop key="hibernate.default.schema">USERDB</prop>	<!-- MySQL schema -->
 			</props>
 		</property>
 		<property name="annotatedClasses">
 			<list>
-				<value>com.ecommerce.Member</value>
+				<value>com.ecommerce.Member</value>		<!-- POJO object -->
 			</list>
 		</property>
 		<property name="packagesToScan" value="com.ecommerce"></property>
 	</bean>
 
-	<bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" id="transactionManager">
+	<!--Transaction-->
+	<bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" id="transactionManager"> <!-- Manages all CRUD operations from the service layer -->
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
