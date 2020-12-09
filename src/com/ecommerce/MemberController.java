@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 //import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller		//@RestController
+@Controller     //@RestController
 @RequestMapping
 public class MemberController {
 	
@@ -25,10 +25,18 @@ public class MemberController {
 	public ModelAndView membersList(ModelAndView model){
 		ArrayList<Member> membersList = memberService.getMembersList();
 		model.addObject("membersList", membersList);
-		model.setViewName("membersList");
+		model.setViewName("index");
 		return model;
 	}
 		
+	@RequestMapping(value="/registration")
+	public ModelAndView register(ModelAndView model){
+		Member member = new Member();
+		model.addObject("member", member);
+		model.setViewName("registration");
+		return model;
+	}
+	
 	@RequestMapping(value="/newmember", method=RequestMethod.GET)
 	public ModelAndView newMember(ModelAndView model) {
 		Member member = new Member();
@@ -37,7 +45,7 @@ public class MemberController {
 		return model;
 	}
 	
-	@RequestMapping(value="/registration", method = {RequestMethod.GET, RequestMethod.POST})	//RequestMethod.GET,RequestMethod.POST
+	@RequestMapping(value="/register", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView addMember(@ModelAttribute Member member) {
 		System.out.println("----------adding member--------");
 		if (member.getId() == 0) {
@@ -47,13 +55,19 @@ public class MemberController {
 		}
 		ArrayList<Member> membersList = memberService.getMembersList();	
 		
-		return new ModelAndView("membersList","membersList", membersList);
+		return new ModelAndView("thankyou","membersList", membersList);
 	}
 	
 	@RequestMapping(value = "/redirect", method = RequestMethod.GET)
 	   public String redirect() {
 	     
-	      return "redirect:thankyou";
+	      return "redirect:index";
+	   }
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	   public String finalPage() {
+	     
+	      return "index";
 	   }
 	   
 }
